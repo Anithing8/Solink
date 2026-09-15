@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoLink</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <div class="brand"><i class="fa-solid fa-link"></i> SoLink</div>
+        <button id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="brand desktop-brand"><i class="fa-solid fa-link"></i> SoLink</div>
+        <div class="nav-items">
+            <div class="nav-item active" onclick="switchView('dashboard')"><i class="fa-solid fa-chart-line"></i> Dashboard</div>
+            <div class="nav-item" onclick="switchView('compose')"><i class="fa-solid fa-pen-to-square"></i> Create Post</div>
+            <div class="nav-item" onclick="switchView('schedule')"><i class="fa-solid fa-calendar-days"></i> Schedule</div>
+            <div class="nav-item" onclick="switchView('settings')"><i class="fa-solid fa-gear"></i> Settings</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        
+        <!-- Dashboard View -->
+        <div id="view-dashboard" class="view active">
+            <h1>Analytics Overview</h1>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Views</h3>
+                    <div class="value">124.5K</div>
+                    <div class="trend positive"><i class="fa-solid fa-arrow-trend-up"></i> +12%</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Engagement</h3>
+                    <div class="value">8.2%</div>
+                    <div class="trend positive"><i class="fa-solid fa-arrow-trend-up"></i> +2.1%</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Recent Comments</h3>
+                    <div class="value">342</div>
+                    <div class="trend negative"><i class="fa-solid fa-arrow-trend-down"></i> -5%</div>
+                </div>
+            </div>
+            <div class="card mt-4">
+                <h3>Recent Posts</h3>
+                <p class="text-muted">No recent posts found. Start creating!</p>
+            </div>
+        </div>
+
+        <!-- Compose View -->
+        <div id="view-compose" class="view">
+            <h1>Create New Post</h1>
+            <div class="card">
+                <div class="form-group">
+                    <label>Media File</label>
+                    <div class="dropzone" id="dropzone" onclick="document.getElementById('file-input').click()">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <div>Drag & drop media here, or click to browse</div>
+                        <input type="file" id="file-input" accept="video/*,image/*">
+                        <div id="file-preview"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Caption</label>
+                    <textarea id="caption" rows="5" placeholder="Write an engaging caption..."></textarea>
+                    <div class="char-count"><span id="char-current">0</span> / 2200</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Post to Platforms</label>
+                    <div class="platforms">
+                        <label class="platform-toggle">
+                            <input type="checkbox" id="plat-yt" checked>
+                            <div class="switch"></div>
+                            <span><i class="fa-brands fa-youtube" style="color: #ff0000;"></i> YouTube</span>
+                        </label>
+                        <label class="platform-toggle">
+                            <input type="checkbox" id="plat-ig" checked>
+                            <div class="switch"></div>
+                            <span><i class="fa-brands fa-instagram" style="color: #e1306c;"></i> Instagram</span>
+                        </label>
+                        <label class="platform-toggle">
+                            <input type="checkbox" id="plat-x">
+                            <div class="switch"></div>
+                            <span><i class="fa-brands fa-x-twitter"></i> X (Twitter)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button class="btn" id="btn-publish" onclick="handlePublish()">
+                    <i class="fa-solid fa-paper-plane"></i> Publish Now
+                </button>
+            </div>
+        </div>
+
+        <!-- Schedule View -->
+        <div id="view-schedule" class="view">
+            <h1>Scheduled Posts</h1>
+            <div class="card">
+                <p class="text-muted">Your scheduled content calendar will appear here.</p>
+                <button class="btn mt-4" onclick="switchView('compose')">Schedule a Post</button>
+            </div>
+        </div>
+
+        <!-- Settings View -->
+        <div id="view-settings" class="view">
+            <h1>API Configurations</h1>
+            <div class="card">
+                <p class="text-muted" style="margin-bottom: 20px; font-size: 0.9rem;">
+                    Keys are stored securely in your browser. If you transition to a backend, you can move these to the provided <code>.env</code> file.
+                </p>
+                <div class="form-group">
+                    <label>YouTube Data API v3 Key</label>
+                    <input type="password" id="key-yt" placeholder="AIzaSy...">
+                </div>
+                <div class="form-group">
+                    <label>Meta Graph API Access Token</label>
+                    <input type="password" id="key-meta" placeholder="EAAB...">
+                </div>
+                <div class="flex-actions">
+                    <button class="btn" onclick="saveKeys()"><i class="fa-solid fa-floppy-disk"></i> Save Keys</button>
+                    <button class="btn btn-danger" onclick="clearKeys()"><i class="fa-solid fa-trash"></i> Clear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toast-container"></div>
+    <script src="script.js"></script>
+</body>
+</html>
