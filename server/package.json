@@ -1,0 +1,17 @@
+{
+  "name": "solink-backend",
+  "version": "1.0.0",
+  "description": "Backend for SoLink — handles the real YouTube/X/Instagram API calls that a browser can't make directly.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "googleapis": "^140.0.1",
+    "node-fetch": "^2.7.0",
+    "twitter-api-v2": "^1.17.2"
+  }
+}
